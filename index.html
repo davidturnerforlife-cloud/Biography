@@ -45,7 +45,7 @@
   /* ---------- MASTHEAD (hero) ---------- */
   .masthead{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr minmax(220px, 300px);
     border-bottom:1px solid var(--rule);
   }
   .masthead-left{
@@ -65,10 +65,12 @@
   .masthead-left .meta{
     display:flex;justify-content:space-between;font-size:11px;color:var(--mid);
   }
-  .masthead-right{position:relative;}
+
+  .masthead-right{position:relative;justify-self:end;width:100%;}
   .portrait-frame{
     position:relative;
-    height:100%;min-height:520px;
+    aspect-ratio:4/5;
+    width:100%;
     background:linear-gradient(var(--bar) 0 40px, transparent 40px calc(100% - 40px), var(--bar) calc(100% - 40px) 100%);
   }
   .portrait-inner{
@@ -79,9 +81,9 @@
   }
   .portrait-inner img{
     width:100%;height:100%;
-    object-fit:cover;
-    object-position:center 20%;
-    filter:grayscale(100%) contrast(1.05);
+    object-fit:contain;
+    object-position:center center;
+    filter:contrast(1.05);
     display:block;
   }
   .portrait-caption{
@@ -146,10 +148,28 @@
 
   /* ---------- CONTACT / FOOTER ---------- */
   .contact{
-    padding:64px 48px;text-align:left;
+    display:grid;
+    grid-template-columns:1fr 200px;
+    gap:48px;
+    align-items:center;
+    padding:64px 48px;
     border-bottom:1px solid var(--rule);
   }
-  .contact p{font-size:15px;margin-bottom:22px;color:#2a2a28;}
+  .contact-text p{font-size:15px;margin-bottom:22px;color:#2a2a28;}
+  .contact-image{
+    justify-self:end;
+    width:100%;
+    max-width:200px;
+    aspect-ratio:5/6;
+    overflow:hidden;
+    border:1px solid var(--rule);
+    background:#e7e5df;
+  }
+  .contact-image img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+  }
   .cta-button{
     display:inline-block;
     border:1px solid var(--ink);
@@ -168,8 +188,11 @@
     .nav-menu{display:none;}
     .masthead{grid-template-columns:1fr;}
     .masthead-left{border-right:none;border-bottom:1px solid var(--rule);}
+    .masthead-right{justify-self:stretch;width:100%;}
     section.split{grid-template-columns:1fr;}
     .fact-grid, .pillars{grid-template-columns:repeat(2,1fr);}
+    .contact{grid-template-columns:1fr;}
+    .contact-image{order:-1;width:100%;max-width:280px;height:auto;aspect-ratio:5/6;}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
@@ -204,7 +227,7 @@
     <div class="portrait-frame">
       <div class="portrait-inner">
         <img src="images/david-turner.jpeg" alt="David Turner, architect, portrait">
-        <p class="portrait-caption">Portrait — David Turner, on site</p>
+        <p class="portrait-caption"></p>
       </div>
     </div>
   </div>
